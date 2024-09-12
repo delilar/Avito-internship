@@ -1,0 +1,17 @@
+# Используем базовый образ node
+FROM node:20
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Устанавливаем json-server глобально
+RUN npm install -g json-server
+
+# Копируем файлы базы данных
+COPY db.json /app
+
+# Открываем порт для json-server
+EXPOSE 3000
+
+# Запускаем json-server с указанием файла базы данных
+CMD ["json-server", "--watch", "db.json", "--port", "3000"]
